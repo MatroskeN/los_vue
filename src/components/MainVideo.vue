@@ -5,6 +5,8 @@
     </video>
     <div class="content">
       <VueSlickCarousel v-bind="settings">
+<!--        <div class="dudeSlide" v-html="info.data">-->
+<!--        </div>-->
         <div class="dudeSlide">
           <img src="../assets/dudes/dude1.png" alt="dude">
         </div>
@@ -15,7 +17,7 @@
           <img src="../assets/dudes/dude3.png" alt="dude">
         </div>
         <div class="dudeSlide">
-          <img src="../assets/dudes/dude4.png" alt="dude">
+          <img src="../assets/dudes/dude1.png" alt="dude">
         </div>
       </VueSlickCarousel>
       <img class="line" id="line" src="../assets/animation.gif" alt="prodLine">
@@ -30,7 +32,7 @@ import 'vue-slick-carousel/dist/vue-slick-carousel-theme.css'
 import axios from "axios";
 
 export default {
-  name: 'MyComponent',
+  name: 'MainVideo',
   components: {VueSlickCarousel},
   data() {
     return {
@@ -47,22 +49,21 @@ export default {
     }
   },
   mounted() {
-      this.todo();
-      let token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsb2dpbiI6ImFkbWluIiwiaWF0IjoxNjU0NzY2NjUzfQ.11N-fYB-gW6hQF23pyb_t9j1gqxmw8K8sJHKKgteS-A';
-      axios
-        .get('https://lots-universe.herokuapp.com/'+token+'/images/1')
-        .then(response => (this.info = response))
-
+    this.todo();
+    let token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsb2dpbiI6ImFkbWluIiwiaWF0IjoxNjU0NzY2NjUzfQ.11N-fYB-gW6hQF23pyb_t9j1gqxmw8K8sJHKKgteS-A';
+    axios
+        .get('https://lots-universe.herokuapp.com/' + token + '/images/' + 1)
+        .then(response => (this.info = response.data))
   },
-  methods : {
-    todo: function (){
-      this.checkHeight = setInterval(function (){
+  methods: {
+    todo: function () {
+      this.checkHeight = setInterval(function () {
         let res = document.querySelector('#line').clientHeight;
-        if (res > 0){
+        if (res > 0) {
           let dudes = document.querySelectorAll('.dudeSlide');
           dudes.forEach(element => {
-            res = res-5;
-            element.style.marginBottom = res+'px';
+            res = res - 5;
+            element.style.marginBottom = res + 'px';
           })
         }
       }, 100);
@@ -93,6 +94,10 @@ export default {
     left: 0;
     width: 100%;
 
+    .dudeSlide ::v-deep img {
+      height: 393px;
+    }
+
     .line {
       position: absolute;
       bottom: 0;
@@ -106,8 +111,8 @@ export default {
 @media(max-width: 1201px) {
   .bannerVideo {
     .content {
-      .dudeSlide{
-        img{
+      .dudeSlide {
+        img {
           height: 200px;
         }
       }
@@ -118,8 +123,8 @@ export default {
 @media(max-width: 900px) {
   .bannerVideo {
     .content {
-      .dudeSlide{
-        img{
+      .dudeSlide {
+        img {
           height: 150px;
         }
       }
@@ -130,8 +135,8 @@ export default {
 @media(max-width: 601px) {
   .bannerVideo {
     .content {
-      .dudeSlide{
-        img{
+      .dudeSlide {
+        img {
           height: 80px;
         }
       }
