@@ -5,19 +5,13 @@
     </video>
     <div class="content">
       <VueSlickCarousel v-bind="settings">
-<!--        <div class="dudeSlide" v-html="info.data">-->
-<!--        </div>-->
-        <div class="dudeSlide">
-          <img src="../assets/dudes/dude1.png" alt="dude">
+        <div class="dudeSlide" v-html="info">
         </div>
-        <div class="dudeSlide">
-          <img src="../assets/dudes/dude2.png" alt="dude">
+        <div class="dudeSlide" v-html="info">
         </div>
-        <div class="dudeSlide">
-          <img src="../assets/dudes/dude3.png" alt="dude">
+        <div class="dudeSlide" v-html="info">
         </div>
-        <div class="dudeSlide">
-          <img src="../assets/dudes/dude1.png" alt="dude">
+        <div class="dudeSlide" v-html="info">
         </div>
       </VueSlickCarousel>
       <img class="line" id="line" src="../assets/animation.gif" alt="prodLine">
@@ -50,10 +44,14 @@ export default {
   },
   mounted() {
     this.todo();
+    let picID = 1;
     let token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsb2dpbiI6ImFkbWluIiwiaWF0IjoxNjU0NzY2NjUzfQ.11N-fYB-gW6hQF23pyb_t9j1gqxmw8K8sJHKKgteS-A';
-    axios
-        .get('https://lots-universe.herokuapp.com/' + token + '/images/' + 1)
-        .then(response => (this.info = response.data))
+    for (let i = 0; i < 15; i++){
+      axios
+          .get('https://lots-universe.herokuapp.com/' + token + '/images/'+picID)
+          .then(response => (this.info = response.data))
+      picID++;
+    }
   },
   methods: {
     todo: function () {
@@ -111,10 +109,8 @@ export default {
 @media(max-width: 1201px) {
   .bannerVideo {
     .content {
-      .dudeSlide {
-        img {
-          height: 200px;
-        }
+      .dudeSlide ::v-deep img{
+        height: 200px;
       }
     }
   }
@@ -123,10 +119,8 @@ export default {
 @media(max-width: 900px) {
   .bannerVideo {
     .content {
-      .dudeSlide {
-        img {
-          height: 150px;
-        }
+      .dudeSlide ::v-deep img {
+        height: 150px;
       }
     }
   }
@@ -135,10 +129,8 @@ export default {
 @media(max-width: 601px) {
   .bannerVideo {
     .content {
-      .dudeSlide {
-        img {
-          height: 80px;
-        }
+      .dudeSlide ::v-deep img {
+        height: 80px;
       }
     }
   }

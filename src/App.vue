@@ -1,5 +1,12 @@
 <template>
   <div id="app">
+    <header>
+      <div class="headerItem">About us</div>
+      <div class="headerItem">history</div>
+      <div class="headerItem">mAGIC EDeN</div>
+      <div class="headerItem">roadmap</div>
+      <div class="headerItem">stuff</div>
+    </header>
     <MainVideo/>
     <AboutUs/>
     <AboutVideo/>
@@ -21,7 +28,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
 @font-face {
   font-family: 'soviet font';
   src: url('fonts/soviet-font.woff2') format('woff2'),
@@ -57,6 +64,50 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
+  header{
+    display: flex;
+    position: absolute;
+    top: 50px;
+    width: 100vw;
+    justify-content: center;
+    z-index: 10;
+    .headerItem{
+      font-family: 'soviet font',serif;
+      font-style: normal;
+      font-weight: 400;
+      font-size: 25px;
+      line-height: 37px;
+      color: #FFFFFF;
+      margin-right: 50px;
+      &:last-of-type{
+        margin-right: unset;
+      }
+    }
+  }
+}
+
+@media(max-width: 1024px){
+  #app{
+    header{
+      top: 20px;
+      .headerItem{
+        margin-right: 10px;
+        font-size: 15px;
+      }
+    }
+  }
+}
+
+@media(max-width:768px){
+  #app{
+    header{
+      .headerItem{
+        margin-right: 10px;
+        font-size: 9px;
+        line-height: 12px;
+      }
+    }
+  }
 }
 
 body {
