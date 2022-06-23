@@ -5,13 +5,8 @@
     </video>
     <div class="content">
       <VueSlickCarousel v-bind="settings">
-        <div class="dudeSlide" v-html="info">
-        </div>
-        <div class="dudeSlide" v-html="info">
-        </div>
-        <div class="dudeSlide" v-html="info">
-        </div>
-        <div class="dudeSlide" v-html="info">
+        <div class="dudeSlide" v-for="item in items" :key="item.url">
+          <img :src="item.url" alt="dude">
         </div>
       </VueSlickCarousel>
       <img class="line" id="line" src="../assets/animation.gif" alt="prodLine">
@@ -23,7 +18,6 @@
 import VueSlickCarousel from 'vue-slick-carousel'
 import 'vue-slick-carousel/dist/vue-slick-carousel.css'
 import 'vue-slick-carousel/dist/vue-slick-carousel-theme.css'
-import axios from "axios";
 
 export default {
   name: 'MainVideo',
@@ -39,19 +33,30 @@ export default {
         pauseOnHover: false,
         cssEase: 'linear'
       },
-      info: []
+      items: [
+        {
+          url: require('../assets/dudes/dude1.png')
+        },
+        {
+          url: require('../assets/dudes/dude2.png')
+        },
+        {
+          url: require('../assets/dudes/dude3.png')
+        },
+        {
+          url: require('../assets/dudes/dude4.png')
+        },
+        {
+          url: require('../assets/dudes/dude5.png')
+        },
+        {
+          url: require('../assets/dudes/dude6.png')
+        },
+      ]
     }
   },
   mounted() {
     this.todo();
-    let picID = 1;
-    let token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsb2dpbiI6ImFkbWluIiwiaWF0IjoxNjU0NzY2NjUzfQ.11N-fYB-gW6hQF23pyb_t9j1gqxmw8K8sJHKKgteS-A';
-    for (let i = 0; i < 15; i++){
-      axios
-          .get('https://lots-universe.herokuapp.com/' + token + '/images/'+picID)
-          .then(response => (this.info = response.data))
-      picID++;
-    }
   },
   methods: {
     todo: function () {
@@ -92,7 +97,7 @@ export default {
     left: 0;
     width: 100%;
 
-    .dudeSlide ::v-deep img {
+    .dudeSlide img {
       height: 393px;
     }
 
@@ -109,7 +114,7 @@ export default {
 @media(max-width: 1201px) {
   .bannerVideo {
     .content {
-      .dudeSlide ::v-deep img{
+      .dudeSlide img{
         height: 200px;
       }
     }
@@ -119,7 +124,7 @@ export default {
 @media(max-width: 900px) {
   .bannerVideo {
     .content {
-      .dudeSlide ::v-deep img {
+      .dudeSlide img {
         height: 150px;
       }
     }
@@ -129,7 +134,7 @@ export default {
 @media(max-width: 601px) {
   .bannerVideo {
     .content {
-      .dudeSlide ::v-deep img {
+      .dudeSlide img {
         height: 80px;
       }
     }

@@ -1,12 +1,30 @@
 <template>
-  <video muted autoplay loop>
-    <source src="../assets/about.mp4" type="video/mp4">
+  <video id="aboutVideo" muted loop>
+    <source :src="videoSrc" type="video/mp4">
   </video>
 </template>
 
 <script>
 export default {
-  name: "AboutVideo"
+  name: "AboutVideo",
+  data() {
+    let videoSrc;
+    return{
+      videoSrc
+    }
+  },
+  mounted(){
+    this.toPlay();
+  },
+  methods: {
+    toPlay: function(){
+      let video = document.querySelector('#aboutVideo');
+      video.oncanplay = function(){
+        video.play()
+      }
+      this.videoSrc = require('../assets/about.mp4');
+    }
+  }
 }
 </script>
 
